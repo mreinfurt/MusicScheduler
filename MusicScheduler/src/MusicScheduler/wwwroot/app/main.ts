@@ -40,8 +40,8 @@ export class App {
     ticks = 0;
     ngOnInit() {
         let timer = Observable.timer(1000, 5000);
-        timer.subscribe((t: any) => this.ticks = t);
-        timer.subscribe((t: any) => {
+        timer.subscribe((t: number) => this.ticks = t);
+        timer.subscribe((t: number) => {
             this.getInfo();
         });
     }
@@ -81,7 +81,7 @@ export class App {
     /**
      * Books the specified song
      */
-    bookSong(url : string, username: string) {
+    bookSong(url: string, username: string) {
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
 

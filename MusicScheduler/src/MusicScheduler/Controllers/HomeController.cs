@@ -62,8 +62,7 @@ namespace MusicScheduler.Controllers
 
             if (string.IsNullOrWhiteSpace(model.URL) || string.IsNullOrWhiteSpace(userName) || !isYoutubeUrl)
             {
-                ViewData["ErrorMessage"] = "Dulli!";
-                return View();
+                return Json("error");
             }
 
             var user = this.userManager.Users.FirstOrDefault(x => x.Name == userName);
@@ -77,18 +76,12 @@ namespace MusicScheduler.Controllers
                 this.userManager.Users.Add(new User(userName, new YoutubeFile {Url = model.URL}));
             }
 
-            return Content("success");
+            return Json("success");
         }
 
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");
-        }
-
-        private enum ActionType
-        {
-            SkipSong = 1,
-            ToggleMusic
         }
     }
 }
