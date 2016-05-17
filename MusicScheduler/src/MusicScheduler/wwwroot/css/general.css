@@ -1,24 +1,25 @@
 body .navbar-inverse {
-    background: linear-gradient(#37537F, #344f79);
-    background-color: #344f79;
-}
+  background-color: #344f79;
+  background: linear-gradient(#37537F, #344f79); }
 
-body .navbar-inverse .navbar-brand { color: white; }
+body .navbar-inverse .navbar-brand {
+  color: white; }
 
-body .navbar-inverse .navbar-nav > li > a { color: white; }
+body .navbar-inverse .navbar-nav > li > a {
+  color: white; }
 
-body .navbar-inverse .navbar-nav > li > a:hover { color: #46A3F4; }
+body .navbar-inverse .navbar-nav > li > a:hover {
+  color: #46A3F4; }
 
 body .input-group {
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
+  margin-top: 20px;
+  margin-bottom: 20px; }
 
 body .currentlyPlaying {
-    font-size: 1.25em;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding: 5px;
-}
+  margin-top: 20px;
+  padding: 5px;
+  margin-bottom: 20px;
+  font-size: 1.25em; }
 
-body .currentlyPlayingHeader { font-weight: bold; }
+body .currentlyPlayingHeader {
+  font-weight: bold; }
