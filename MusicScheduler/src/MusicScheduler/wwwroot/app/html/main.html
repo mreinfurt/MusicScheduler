@@ -42,6 +42,23 @@
     </div>
 
     <hr/>
+
+    <h3>Users</h3>
+    <table *ngFor='let user of info.Users' class="table userTable">
+        <tr>
+            <th>{{user.Name}}</th>
+            <td>{{user.TimePlayed}}s</td>
+            <td></td>
+        </tr>
+        <tr *ngFor='let video of user.YoutubeLinks'>
+            <th></th>
+            <td>{{video.Name}}</td>
+            <td>{{video.Duration}}s</td>
+        </tr>
+    </table>
+        
+    <hr/>
+
     <footer>
         <p>&copy; 2016 - MusicScheduler</p>
     </footer>

@@ -12,6 +12,12 @@ body .navbar-inverse .navbar-nav > li > a {
 body .navbar-inverse .navbar-nav > li > a:hover {
   color: #46A3F4; }
 
+body .userTable th {
+  width: 150px; }
+
+body .userTable {
+  margin-bottom: 50px; }
+
 body .input-group {
   margin-top: 20px;
   margin-bottom: 20px; }
