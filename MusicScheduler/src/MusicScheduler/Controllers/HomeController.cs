@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using MusicScheduler.Objects;
@@ -103,6 +104,26 @@ namespace MusicScheduler.Controllers
             }
 
             return View();
+        }
+
+        [HttpGetAttribute("api/info")]
+        public Info GetInfo()
+        {
+            var info = new Info
+            {
+                CurrentlyPlaying = ServiceLocator.Musicplayer.CurrentPlayingSong != null
+                    ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
+                    : "Nothing is playing",
+                IsPaused = ServiceLocator.Musicplayer.IsPaused,
+                Users = new List<User>()
+            };
+
+            foreach (User user in this.userManager.Users)
+            {
+                info.Users.Add(user);
+            }
+
+            return info;
         }
 
         public IActionResult Error()
