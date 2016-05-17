@@ -11,10 +11,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>
+                <li (click)="skip()">
                     <a>Skip</a>
                 </li>
-                <li>
+                <li (click)="pauseResume()">
                     <a>Pause/Resume</a>
                 </li>
             </ul>
@@ -23,7 +23,10 @@
 </div>
 
 <div class="container body-content">
-    <h1>{{info.CurrentlyPlaying}}</h1>
+    <p class="bg-info currentlyPlaying">
+        <span class="currentlyPlayingHeader">Currently playing</span><br/>{{info.CurrentlyPlaying}}
+    </p>
+
     <h2>Book</h2>
     <div class="input-group">
         <span class="input-group-addon" id="input-youtube">Youtube URL</span>

@@ -20,11 +20,13 @@ namespace MusicScheduler.Controllers
             return View();
         }
 
+        [HttpPost("api/skip")]
         public void Skip()
         {
             ServiceLocator.Musicplayer.SkipCurrentSong();
         }
 
+        [HttpPost("api/pauseResume")]
         public void PauseResume()
         {
             ServiceLocator.Musicplayer.PauseResumeCurrentSong();
@@ -37,7 +39,7 @@ namespace MusicScheduler.Controllers
             {
                 CurrentlyPlaying = ServiceLocator.Musicplayer.CurrentPlayingSong != null
                     ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
-                    : "Nothing is playing",
+                    : "",
                 IsPaused = ServiceLocator.Musicplayer.IsPaused,
                 Users = new List<User>()
             };

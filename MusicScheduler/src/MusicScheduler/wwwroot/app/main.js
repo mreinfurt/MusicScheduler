@@ -11,7 +11,7 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1, http_2, Observable_1;
-    var Info, App;
+    var YoutubeFile, User, Info, App;
     return {
         setters:[
             function (core_1_1) {
@@ -26,6 +26,12 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
                 Observable_1 = Observable_1_1;
             }],
         execute: function() {
+            class YoutubeFile {
+            }
+            exports_1("YoutubeFile", YoutubeFile);
+            class User {
+            }
+            exports_1("User", User);
             class Info {
             }
             exports_1("Info", Info);
@@ -33,6 +39,14 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
                 constructor(_http) {
                     this._http = _http;
                     this.info = new Info();
+                    this.ticks = 0;
+                }
+                ngOnInit() {
+                    let timer = Observable_1.Observable.timer(1000, 5000);
+                    timer.subscribe((t) => this.ticks = t);
+                    timer.subscribe((t) => {
+                        this.getInfo();
+                    });
                 }
                 /**
                  * Gets the music info  from the server
@@ -42,7 +56,24 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
                         .map(this.parseResponse)
                         .catch(this.handleError)
                         .subscribe((info) => this.info = info);
-                    alert(JSON.stringify(this.info));
+                }
+                /**
+                 * Pauses or resumes the music
+                 */
+                pauseResume() {
+                    this._http.post("api/pauseResume", "")
+                        .map(this.parseResponse)
+                        .catch(this.handleError)
+                        .subscribe();
+                }
+                /**
+                 * Pauses or resumes the music
+                 */
+                skip() {
+                    this._http.post("api/skip", "")
+                        .map(this.parseResponse)
+                        .catch(this.handleError)
+                        .subscribe();
                 }
                 /**
                  * Books the specified song

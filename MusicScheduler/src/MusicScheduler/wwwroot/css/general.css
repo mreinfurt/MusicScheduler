@@ -6,7 +6,8 @@ body .navbar-inverse .navbar-brand {
   color: white; }
 
 body .navbar-inverse .navbar-nav > li > a {
-  color: white; }
+  color: white;
+  cursor: pointer; }
 
 body .navbar-inverse .navbar-nav > li > a:hover {
   color: #46A3F4; }

@@ -6,9 +6,24 @@ import {HTTP_PROVIDERS} from "angular2/http";
 import "rxjs/Rx";
 import { Observable } from "rxjs/Observable";
 
+export class YoutubeFile {
+    name: string;
+    url: string;
+    path: string;
+    downloaded: boolean;
+    duration: number;
+}
+
+export class User {
+    name: string;
+    timePlayed: string;
+    youtubeLinks: Array<YoutubeFile>;
+}
+
 export class Info {
     currentlyPlaying: string;
     isPaused: boolean;
+    users: Array<User>;
 }
 
 @Component({
@@ -22,6 +37,15 @@ export class App {
 
     constructor(private _http: Http) {}
 
+    ticks = 0;
+    ngOnInit() {
+        let timer = Observable.timer(1000, 5000);
+        timer.subscribe((t: any) => this.ticks = t);
+        timer.subscribe((t: any) => {
+            this.getInfo();
+        });
+    }
+
     /**
      * Gets the music info  from the server
      */
@@ -32,8 +56,26 @@ export class App {
             .subscribe(
                 (info: Info) => this.info = info
             );
+    }
 
-        alert(JSON.stringify(this.info));
+    /**
+     * Pauses or resumes the music
+     */
+    pauseResume() {
+        this._http.post("api/pauseResume", "")
+            .map(this.parseResponse)
+            .catch(this.handleError)
+            .subscribe();
+    }
+
+    /**
+     * Pauses or resumes the music
+     */
+    skip() {
+        this._http.post("api/skip", "")
+            .map(this.parseResponse)
+            .catch(this.handleError)
+            .subscribe();
     }
 
     /**
