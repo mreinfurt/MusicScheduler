@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable'], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable']
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, Observable_1;
-    var App;
+    var core_1, http_1, http_2, Observable_1;
+    var Info, App;
     return {
         setters:[
             function (core_1_1) {
@@ -19,35 +19,59 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'rxjs/Observable']
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+                http_2 = http_1_1;
             },
             function (_1) {},
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
             }],
         execute: function() {
+            class Info {
+            }
+            exports_1("Info", Info);
             let App = class App {
                 constructor(_http) {
                     this._http = _http;
-                    this.title = "hallo";
-                    this._http.get('api/info')
-                        .map((response) => {
-                        alert("test");
-                        console.log(response.json);
-                        this.title = response.json["CurrentlyPlaying"];
-                        return response.json();
-                    })
-                        .catch(this.handleError);
+                    this.info = new Info();
+                }
+                /**
+                 * Gets the music info  from the server
+                 */
+                getInfo() {
+                    this._http.get("api/info")
+                        .map(this.parseResponse)
+                        .catch(this.handleError)
+                        .subscribe((info) => this.info = info);
+                    alert(JSON.stringify(this.info));
+                }
+                /**
+                 * Books the specified song
+                 */
+                bookSong(url, username) {
+                    const headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/json");
+                    this._http.post("api/bookSong", JSON.stringify({ "URL": url, "Name": username }), { headers: headers })
+                        .map(this.parseResponse)
+                        .catch(this.handleError)
+                        .subscribe();
+                }
+                parseResponse(res) {
+                    if (res.status < 200 || res.status >= 300) {
+                        throw new Error(`Response status: ${res.status}`);
+                    }
+                    const body = res.json();
+                    return body || {};
                 }
                 handleError(error) {
-                    alert("test");
                     console.log(error);
                     return Observable_1.Observable.throw(error.message);
                 }
             };
             App = __decorate([
                 core_1.Component({
-                    selector: 'MusicSchedulerApp',
-                    template: '<p>{{title}}</p>'
+                    selector: "MusicSchedulerApp",
+                    providers: [http_2.HTTP_PROVIDERS],
+                    templateUrl: "./app/html/main.html"
                 }), 
                 __metadata('design:paramtypes', [http_1.Http])
             ], App);

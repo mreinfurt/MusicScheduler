@@ -1,7 +1,6 @@
 ﻿import {bootstrap} from 'angular2/platform/browser';
-import {HTTP_PROVIDERS} from 'angular2/http';
 import { App } from './main';
 
-bootstrap(App, [HTTP_PROVIDERS])
+bootstrap(App)
     .then(success => console.log(`Bootstrap success`))
     .catch(error => console.log(error));

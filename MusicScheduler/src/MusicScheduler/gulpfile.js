@@ -33,7 +33,7 @@ var config = {
         require.resolve('systemjs/dist/system.src.js'),
         require.resolve('angular2/bundles/angular2.dev.js'),
         require.resolve('angular2/bundles/router.dev.js'),
-        require.resolve('angular2/bundles/http.dev.js'),
+        require.resolve('angular2/bundles/http.js'),
         require.resolve('jquery/dist/jquery.js'),
         require.resolve('bootstrap/dist/js/bootstrap.js')
     ]

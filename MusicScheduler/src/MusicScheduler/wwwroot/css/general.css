@@ -23,3 +23,9 @@ body .currentlyPlaying {
 
 body .currentlyPlayingHeader {
   font-weight: bold; }
+
+body .input-group {
+  width: 500px; }
+
+body .input-group-addon {
+  width: 125px; }
